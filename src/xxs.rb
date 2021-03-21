@@ -44,11 +44,13 @@ if __FILE__ == $0
   (1..6).each do |n|
     xxs.edit_sheet(n) do |doc|
       c = doc.xpath(
-        '/ns:worksheet/ns:sheetData/ns:row[@r="5"]/ns:c[@r="G5"]',
+        # '//ns:c[@r="G5"]',
+        "//ns:c/ns:v[contains(text(), '44275')]",
         {ns: "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
       ).first
+      next unless c
       pp c
-      pp c.chlidren
+      pp c.parent
     end
   end
   #xxs.archive('/tmp/new_xxs.xlsx')
